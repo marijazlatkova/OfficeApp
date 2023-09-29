@@ -1,6 +1,7 @@
 const User = require("../pkg/users");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const { promisify } = require("util");
 
 const register = async (req, res) => {
   try {
@@ -51,7 +52,32 @@ const login = async (req, res) => {
   }
 };
 
+const protect = async (req, res, next) => {
+  try {
+    console.log(req.headers);
+    let token;
+    if (req.headers.authorization) {
+      token = req.headers.authorization.split(" ")[1];
+    }
+    if (!token) {
+      return res.status(500).send("You are not logged in! Please log in");
+    }
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    console.log(decoded);
+    const userTrue = await User.findById(decoded.id);
+    if (!userTrue) {
+      return res.status(401).send("User doesn't exist anymore");
+    }
+    req.auth = userTrue;
+    next();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 module.exports = {
   register,
-  login
+  login,
+  protect
 };

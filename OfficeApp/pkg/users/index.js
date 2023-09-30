@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-//! Proverka dali passwordot e promenet pred da bide hashiram i zacuvan vo databaza
+//! Proverka dali passwordot e promenet pred da bide hashiran i zacuvan vo databaza
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 12);

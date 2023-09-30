@@ -1,15 +1,19 @@
 const express = require("express");
 const jwt = require("express-jwt");
-require("./pkg/db/index");
 const cookieParser = require("cookie-parser");
+require("./pkg/db/index");
 
 const { register, login } = require("./handlers/authHandler");
 const { create, getAll, getOne, update, remove, getByUser, createByUser } = require("./handlers/postHandler");
+const { getDefaultPage, getRegisterPage, getLoginPage } = require("./handlers/viewHandler");
 
 const app = express();
+app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use(express.static("public"));
 
 app.use(jwt
   .expressjwt({
@@ -29,8 +33,11 @@ app.use(jwt
   },
 }).unless({
     path: [
+      "/",
+      "/register",
+      "/login",
       "/api/v1/auth/register",
-      "/api/v1/auth/login"
+      "/api/v1/auth/login",
     ],
   })
 );
@@ -48,6 +55,10 @@ app.delete("/posts/:id", remove);
 app.post("/createByUser", createByUser);
 app.get("/getByUser", getByUser);
 
+//! view routes
+app.get("/", getDefaultPage);
+app.get("/register", getRegisterPage);
+app.get("/login", getLoginPage);
 
 app.listen(process.env.PORT, (err) => {
   err

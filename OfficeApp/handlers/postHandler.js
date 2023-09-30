@@ -11,7 +11,7 @@ const create = async (req, res) => {
 
 const getAll = async (req, res) => {
   try {
-    const allPosts = await Post.find().populate("author");
+    const allPosts = await Post.find();
     const totalPosts = allPosts.length;
     return res.status(200).send({
       message: `${totalPosts} posts found successfully`,

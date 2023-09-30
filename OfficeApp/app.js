@@ -4,8 +4,8 @@ const cookieParser = require("cookie-parser");
 require("./pkg/db/index");
 
 const { register, login } = require("./handlers/authHandler");
-const { create, getAll, getOne, update, remove, getByUser, createByUser } = require("./handlers/postHandler");
-const { getDefaultPage, getRegisterPage, getLoginPage } = require("./handlers/viewHandler");
+const { create, getAll, getOne, update, remove, getByUser, createByUser, uploadImage } = require("./handlers/postHandler");
+const { getDefaultPage, getRegisterPage, getLoginPage, getHomePage, createPosts } = require("./handlers/viewHandler");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -50,7 +50,7 @@ app.post("/api/v1/auth/login", login);
 app.post("/posts", create);
 app.get("/posts", getAll);
 app.get("/posts/:id", getOne);
-app.patch("/posts/:id", update);
+app.patch("/posts/:id", uploadImage, update);
 app.delete("/posts/:id", remove);
 app.post("/createByUser", createByUser);
 app.get("/getByUser", getByUser);
@@ -59,6 +59,8 @@ app.get("/getByUser", getByUser);
 app.get("/", getDefaultPage);
 app.get("/register", getRegisterPage);
 app.get("/login", getLoginPage);
+app.get("/home", getHomePage);
+app.post("/createPosts", createPosts);
 
 app.listen(process.env.PORT, (err) => {
   err

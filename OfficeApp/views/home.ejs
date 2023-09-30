@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="header-container">
+      <p><%= title %></p>
+      <img
+        class="plus-logo"
+        width="250"
+        height="200"
+        src="../images/plus-logo.png"
+        alt="plus-logo"
+      />
+      <img
+        class="search-logo"
+        width="250"
+        height="200"
+        src="../images/search-logo.png"
+        alt="search-logo"
+      />
+      <p><%= subtitle %></p>
+      <img
+        class="myprofile-logo"
+        width="250"
+        height="200"
+        src="../images/myprofile-logo.png"
+        alt="myprofile-logo"
+        onclick="window.location.href = '/myProfile';"
+      />
+    </div>
+    <hr class="hr-1" />
+    <div class="input-container">
+      <form action="/createPosts" method="POST">
+        <label for="comment">What's on your mind?</label>
+        <br />
+        <hr class="hr-2" />
+        <input
+          type="hidden"
+          name="username"
+          id="username"
+          placeholder="username"
+          required
+          value="<%= username %>"
+        />
+        <input
+          type="text"
+          name="comment"
+          id="comment"
+          placeholder="Type here..."
+          required
+          onkeydown="if (e.key === 'Enter') { e.preventDefault(); this.form.submit(); }"
+        />
+        <br />
+        <br />
+      </form>
+    </div>
+    <div class="posts-container">
+      <% posts.forEach(post => { %>
+      <div class="posts">
+        <img
+          class="profile-picture"
+          width="300"
+          height="200"
+          class="image"
+          src="/images/<%= post.image %>"
+        />
+        <h3 class="username"><%= post.username %></h3>
+        <p class="comment"><%= post.comment %></p>
+      </div>
+      <% }) %>
+    </div>
+  </body>
+</html>

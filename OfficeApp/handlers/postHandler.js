@@ -1,5 +1,37 @@
 const Post = require("../pkg/posts");
 
+const multer = require("multer");
+const uuid = require("uuid");
+const imageId = uuid.v4();
+
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images");
+  },
+  filename: (req, file, cb) => {
+    const ext = file.mimetype.split("/")[1];
+    cb(null, `profile-${imageId}-${Date.now()}.${ext}`);
+  }
+});
+
+const multerFilter = (req, file, cb) => {
+  console.log('File MIME Type:', file.mimetype);
+  
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    console.log('Unsupported File Type');
+    cb(new Error("File type not supported"), false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+const uploadImage = upload.single("image");
+
 const create = async (req, res) => {
   try {
     const newPost = await Post.create(req.body);
@@ -33,6 +65,10 @@ const getOne = async (req, res) => {
 
 const update = async (req, res) => {
   try {
+    if (req.file) {
+      const filename = req.file.filename;
+      req.body.image = filename;
+    }
     await Post.findByIdAndUpdate(req.params.id, req.body);
     return res.status(204).send("Post updated successfully");
   } catch (err) {
@@ -86,5 +122,6 @@ module.exports = {
   update,
   remove,
   createByUser,
-  getByUser
+  getByUser,
+  uploadImage
 };

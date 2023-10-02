@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="header-container">
+      <img
+        class="home-logo"
+        width="300"
+        height="200"
+        src="../images/home-logo.png"
+        onclick="window.location.href = '/home';"
+        alt="home-logo"
+      />
+      <p><%= title %></p>
+      <hr />
+      <img
+        class="profile-picture"
+        width="300"
+        height="200"
+        src="../images/woman_logo.png"
+        alt="profile-picture"
+      />
+      <h3><%= username %></h3>
+    </div>
+    <div class="posts-container">
+      <p><%= subtitle %></p>
+      <% posts.forEach(post => { %>
+      <div class="posts">
+        <img
+          class="profile-picture"
+          width="300"
+          height="200"
+          src="/images/<%= post.image %>"
+        />
+        <h3 class="username"><%= post.username %></h3>
+        <p class="comment"><%= post.comment %></p>
+        <button class="modify-icon" onclick="toggleForm('<%= post._id %>')">
+          <img
+            width="20"
+            height="20"
+            src="../images/modify-icon.png"
+            alt="modify-icon"
+          />
+        </button>
+
+        <form
+          action="/modifyPosts/<%= post._id %>"
+          method="POST"
+          id="modifyForm<%= post._id %>"
+          style="display: none"
+        >
+          <input
+            type="text"
+            name="comment"
+            id="comment"
+            placeholder="Modify your comment here..."
+            required
+            onkeydown="if (e.key === 'Enter') { e.preventDefault(); this.form.submit(); }"
+          />
+        </form>
+        <a class="delete-icon" href="/removePosts/<%= post._id %>"
+          ><img width="30" height="20" src="../images/delete.png" alt="delete"
+        /></a>
+      </div>
+      <% }) %>
+    </div>
+    <br />
+    <button class="logout-button" onclick="window.location.href = '/logout';">
+      Log Out
+    </button>
+    <script>
+      const toggleForm = (postId) => {
+        const form = document.getElementById("modifyForm" + postId);
+        if (form.style.display === "none") {
+          form.style.display = "block";
+        } else {
+          form.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>

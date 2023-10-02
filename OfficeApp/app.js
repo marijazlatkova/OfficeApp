@@ -5,7 +5,7 @@ require("./pkg/db/index");
 
 const { register, login } = require("./handlers/authHandler");
 const { create, getAll, getOne, update, remove, getByUser, createByUser, uploadImage } = require("./handlers/postHandler");
-const { getDefaultPage, getRegisterPage, getLoginPage, getHomePage, createPosts } = require("./handlers/viewHandler");
+const { getDefaultPage, getRegisterPage, getLoginPage, getHomePage, createPosts, getMyProfile, modifyPosts, removePosts, logout } = require("./handlers/viewHandler");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -36,6 +36,7 @@ app.use(jwt
       "/",
       "/register",
       "/login",
+      "/logout",
       "/api/v1/auth/register",
       "/api/v1/auth/login",
     ],
@@ -61,6 +62,11 @@ app.get("/register", getRegisterPage);
 app.get("/login", getLoginPage);
 app.get("/home", getHomePage);
 app.post("/createPosts", createPosts);
+app.get("/myProfile", getMyProfile);
+app.post("/modifyPosts/:id", modifyPosts);
+app.get("/removePosts/:id", removePosts);
+app.get("/logout", logout);
+
 
 app.listen(process.env.PORT, (err) => {
   err

@@ -2,6 +2,7 @@ const User = require("../pkg/users");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
+const { sendWelcomeEmail } = require("../pkg/mailer");
 
 const register = async (req, res) => {
   try {
@@ -11,9 +12,9 @@ const register = async (req, res) => {
       email,
       password,
     });
+    await sendWelcomeEmail(email);
     return res.status(201).send(newUser);
   } catch (err) {
-    console.log(err);
     return res.status(500).send("Internal Server Error");
   }
 };
@@ -26,7 +27,7 @@ const login = async (req, res) => {
     }
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).send("This user with this email doesn't exist in the database");
+      return res.status(404).send("This user with this email doesn't exist in database");
     }
     const isPasswordValid = bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
@@ -47,14 +48,12 @@ const login = async (req, res) => {
 
     return res.status(200).send(token);
   } catch (err) {
-    console.log(err);
     return res.status(500).send("Internal Server Error");
   }
 };
 
 const protect = async (req, res, next) => {
   try {
-    console.log(req.headers);
     let token;
     if (req.headers.authorization) {
       token = req.headers.authorization.split(" ")[1];
@@ -64,15 +63,14 @@ const protect = async (req, res, next) => {
     }
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
     console.log(decoded);
-    const userTrue = await User.findById(decoded.id);
-    if (!userTrue) {
+    const user = await User.findById(decoded.id);
+    if (!user) {
       return res.status(401).send("User doesn't exist anymore");
     }
-    req.auth = userTrue;
+    req.auth = user;
     next();
   } catch (err) {
-    console.log(err);
-    res.status(500).send("Internal Server Error");
+    return res.status(500).send("Internal Server Error");
   }
 };
 

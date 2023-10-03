@@ -1,5 +1,10 @@
 const login = async (email, password) => {
   try {
+    if (!email || !password) {
+      console.log("Email and password are required.");
+      return;
+    }
+    
     const response = await fetch("/api/v1/auth/login", {
       method: "POST",
       headers: {
@@ -12,7 +17,11 @@ const login = async (email, password) => {
     });
 
     console.log(response);
-    window.location.href = "/home";
+    if (response.status === 200) {
+      window.location.href = "/home";
+    } else {
+      console.log("Login failed");
+    }
   } catch (err) {
     console.log("An error has occurred:", err);
   }

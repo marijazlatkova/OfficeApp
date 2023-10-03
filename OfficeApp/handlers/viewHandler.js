@@ -1,5 +1,37 @@
 const Post = require("../pkg/posts");
 
+const multer = require("multer");
+const uuid = require("uuid");
+const imageId = uuid.v4();
+
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images");
+  },
+  filename: (req, file, cb) => {
+    const ext = file.mimetype.split("/")[1];
+    cb(null, `profile-${imageId}-${Date.now()}.${ext}`);
+  }
+});
+
+const multerFilter = (req, file, cb) => {
+  console.log('File MIME Type:', file.mimetype);
+  
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    console.log('Unsupported File Type');
+    cb(new Error("File type not supported"), false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+const uploadSingleImage = upload.single("image");
+
 const getDefaultPage = async (req, res) => {
   try {
     return res.render("default-page", {
@@ -31,6 +63,28 @@ const getLoginPage= async (req, res) => {
   }
 };
 
+const getForgotPassword = async (req, res) => {
+  try {
+    return res.render("forgot-password", {
+      title: "The Office Chat App",
+    });
+  } catch (err) {
+    return res.status(500).send(err)
+  }
+};
+
+const getResetPassword = async (req, res) => {
+  try {
+    const token = req.query.token;
+    return res.render("reset-password", {
+      title: "The Office Chat App",
+      token
+    });
+  } catch (err) {
+    return res.status(500).send(err)
+  }
+};
+
 const getHomePage = async (req, res) => {
   try {
     const username = req.auth.name;
@@ -48,9 +102,23 @@ const getHomePage = async (req, res) => {
 
 const createPosts = async (req, res) => {
   try {
-    await Post.create(req.body);
-    return res.redirect("/home");
+    if (req.file) {
+      const filename = req.file.filename;
+      const userId = req.auth.id;
+
+      await Post.create({
+        username: req.auth.name,
+        comment: req.body.comment,
+        author: userId,
+        time: req.body.time,
+        image: filename
+      });
+      return res.redirect("/home");
+    } else {
+      return res.status(400).send("No image uploaded.");
+    }
   } catch (err) {
+    console.error(err);
     return res.status(500).send(err);
   }
 };
@@ -67,6 +135,7 @@ const getMyProfile = async (req, res) => {
       posts
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).send(err);
   }
 };
@@ -92,16 +161,19 @@ const removePosts = async (req, res) => {
 const logout = (req, res) => {
   try {
     req.logout;
-    res.redirect("/login")
+    return res.redirect("/")
   } catch (err) {
-    res.status(500).send("Error logging out", err);
+    return res.status(500).send("Error logging out", err);
   }
 };
 
 module.exports = {
+  uploadSingleImage,
   getDefaultPage,
   getRegisterPage,
   getLoginPage,
+  getForgotPassword,
+  getResetPassword,
   getHomePage,
   createPosts,
   getMyProfile,

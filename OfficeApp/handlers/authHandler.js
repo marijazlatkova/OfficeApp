@@ -2,7 +2,7 @@ const User = require("../pkg/users");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
-const { sendWelcomeEmail } = require("../pkg/mailer");
+const { sendWelcomeEmail, sendPasswordResetEmail } = require("../pkg/mailer");
 
 const register = async (req, res) => {
   try {
@@ -10,7 +10,7 @@ const register = async (req, res) => {
     const newUser = await User.create({
       name,
       email,
-      password,
+      password
     });
     await sendWelcomeEmail(email);
     return res.status(201).send(newUser);
@@ -27,9 +27,9 @@ const login = async (req, res) => {
     }
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).send("This user with this email doesn't exist in database");
+      return res.status(404).send("This user with this email doesn't exist in the database");
     }
-    const isPasswordValid = bcrypt.compare(password, user.password);
+    const isPasswordValid = bcrypt.compareSync(password, user.password);
     if (!isPasswordValid) {
       return res.status(400).send("Invalid password or email");
     }
@@ -39,14 +39,56 @@ const login = async (req, res) => {
       { expiresIn: process.env.JWT_EXPIRES }
     );
     res.cookie("jwt", token, {
-      expires: new Date(
-        Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-      ),
+      expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
       secure: false,
       httpOnly: true
     });
-
     return res.status(200).send(token);
+  } catch (err) {
+    return res.status(500).send("Internal Server Error");
+  }
+};
+
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).send("User not found");
+    }
+    const resetToken = jwt.sign(
+      { id: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = Date.now() + 3600000;
+    await user.save();
+    const resetLink = `${process.env.RESET_PASSWORD_LINK}?token=${resetToken}`;
+    await sendPasswordResetEmail(email, resetLink);
+    return res.status(200).send("Password reset link has been sent to your email");
+  } catch (err) {
+    return res.status(500).send("Internal Server Error");
+  }
+};
+
+const resetPassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword, email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).send("User not found");
+    }
+    if (!bcrypt.compareSync(oldPassword, user.password)) {
+      return res.status(400).send("Incorrect password");
+    }
+    if (oldPassword === newPassword) {
+      return res.status(400).send("New password cannot be the same as the old password");
+    }
+    const hashedPassword = bcrypt.hashSync(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+    return res.status(200).send("Password reset successfully");
   } catch (err) {
     return res.status(500).send("Internal Server Error");
   }
@@ -55,14 +97,13 @@ const login = async (req, res) => {
 const protect = async (req, res, next) => {
   try {
     let token;
-    if (req.headers.authorization) {
+    if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
       token = req.headers.authorization.split(" ")[1];
     }
     if (!token) {
-      return res.status(500).send("You are not logged in! Please log in");
+      return res.status(401).send("You are not logged in. Please log in.");
     }
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-    console.log(decoded);
     const user = await User.findById(decoded.id);
     if (!user) {
       return res.status(401).send("User doesn't exist anymore");
@@ -77,5 +118,7 @@ const protect = async (req, res, next) => {
 module.exports = {
   register,
   login,
+  forgotPassword,
+  resetPassword,
   protect
 };

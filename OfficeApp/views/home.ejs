@@ -33,7 +33,7 @@
     </div>
     <hr class="hr-1" />
     <div class="input-container">
-      <form action="/createPosts" method="POST">
+      <form action="/createPosts" method="POST" enctype="multipart/form-data">
         <label for="comment">What's on your mind?</label>
         <br />
         <hr class="hr-2" />
@@ -54,6 +54,8 @@
           onkeydown="if (e.key === 'Enter') { e.preventDefault(); this.form.submit(); }"
         />
         <br />
+        <input type="file" name="image" id="image" accept="image/*" />
+        <br />
         <br />
       </form>
     </div>
@@ -69,6 +71,7 @@
         />
         <h3 class="username"><%= post.username %></h3>
         <p class="comment"><%= post.comment %></p>
+        <p class="time"><%= post.time %></p>
       </div>
       <% }) %>
     </div>

@@ -21,4 +21,4 @@ const postSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("Post", postSchema, "OfficeChatApp");
+module.exports = mongoose.model("Post", postSchema, "OfficeApp");

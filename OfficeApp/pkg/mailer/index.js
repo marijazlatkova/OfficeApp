@@ -22,6 +22,22 @@ const sendWelcomeEmail = async (toEmail) => {
   }
 };
 
+const sendPasswordResetEmail = async (toEmail, resetLink) => {
+  const data = {
+    from: process.env.MAILGUN_SENDER,
+    to: toEmail,
+    subject: "Password Reset Request",
+    text: `To reset your password please click on the following link: ${resetLink}`,
+  };
+  try {
+    await mg.messages.create(process.env.MAILGUN_DOMAIN, data);
+    console.log("Password reset email sent successfully");
+  } catch (err) {
+    console.log("Error sending password reset email:", err);
+  }
+};
+
 module.exports = {
-  sendWelcomeEmail
+  sendWelcomeEmail,
+  sendPasswordResetEmail
 };

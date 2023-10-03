@@ -3,9 +3,9 @@ const jwt = require("express-jwt");
 const cookieParser = require("cookie-parser");
 require("./pkg/db/index");
 
-const { register, login } = require("./handlers/authHandler");
+const { register, login, forgotPassword, resetPassword } = require("./handlers/authHandler");
 const { create, getAll, getOne, update, remove, getByUser, createByUser, uploadImage } = require("./handlers/postHandler");
-const { getDefaultPage, getRegisterPage, getLoginPage, getHomePage, createPosts, getMyProfile, modifyPosts, removePosts, logout } = require("./handlers/viewHandler");
+const { getDefaultPage, getRegisterPage, getForgotPassword, getResetPassword, getLoginPage, getHomePage, createPosts, getMyProfile, modifyPosts, removePosts, logout, uploadSingleImage } = require("./handlers/viewHandler");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -39,6 +39,10 @@ app.use(jwt
       "/logout",
       "/api/v1/auth/register",
       "/api/v1/auth/login",
+      "/api/v1/auth/forgotPassword",
+      "/api/v1/auth/resetPassword",
+      "/forgotPassword",
+      "/resetPassword",
     ],
   })
 );
@@ -46,6 +50,10 @@ app.use(jwt
 //! user routes
 app.post("/api/v1/auth/register", register);
 app.post("/api/v1/auth/login", login);
+app.post("/api/v1/auth/forgotPassword", forgotPassword);
+app.post("/api/v1/auth/resetPassword", resetPassword);
+app.get("/forgotPassword", getForgotPassword);
+app.get("/resetPassword", getResetPassword);
 
 //! posts routes
 app.post("/posts", create);
@@ -61,7 +69,7 @@ app.get("/", getDefaultPage);
 app.get("/register", getRegisterPage);
 app.get("/login", getLoginPage);
 app.get("/home", getHomePage);
-app.post("/createPosts", createPosts);
+app.post("/createPosts", uploadSingleImage, createPosts);
 app.get("/myProfile", getMyProfile);
 app.post("/modifyPosts/:id", modifyPosts);
 app.get("/removePosts/:id", removePosts);

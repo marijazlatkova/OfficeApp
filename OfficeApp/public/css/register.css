@@ -1,0 +1,88 @@
+a {
+  color: rgba(255, 0, 0, 0.55);
+  text-decoration: none;
+}
+
+.register-container {
+  background-color: rgb(210, 254, 255);
+  border-radius: 50px;
+  padding: 20px;
+  margin: 15px;
+  margin-bottom: 30px;
+  height: 96vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.register-title {
+  color: rgba(0, 0, 0, 0.848);
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: -15px;
+}
+
+.register-subtitle {
+  color: rgba(255, 0, 0, 0.55);
+  font-size: 23px;
+  margin-bottom: 100px;
+}
+
+#email, #password, #name {
+  border: none;
+  border-radius: 45px;
+  width: 265px;
+  height: 52px;
+  padding: 20px;
+  margin-bottom: 25px;
+  font-size: 14px;
+  background-color: white;
+  position: relative;
+  bottom: 30px;
+}
+
+::placeholder {
+  color: rgb(185, 185, 185);
+}
+
+button[type="submit"] {
+  background-color: white;
+  border: none;
+  border-radius: 45px;
+  width: 140px;
+  padding: 12px;
+  font-size: 13.5px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  color: rgba(255, 0, 0, 0.45);
+}
+
+@media screen and (min-width: 1024px) {
+  .register-container {
+    padding: 40px;
+    margin: 0;
+    border-radius: 0;
+    height: 97.7vh;
+  }
+
+  .register-title {
+    display: none;
+  }
+
+  .register-subtitle {
+    font-size: 35px;
+  }
+
+  #email, #password, #name {
+    width: 550px;
+    padding: 30px;
+    font-size: 16px;
+  }
+
+  button[type="submit"] {
+    width: 160px;
+    padding: 15px;
+    font-size: 16px;
+  }
+}

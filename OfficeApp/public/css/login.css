@@ -1,0 +1,81 @@
+a {
+  color: rgba(255, 0, 0, 0.55);
+  text-decoration: none;
+}
+
+.login-container {
+  background-color: rgb(210, 254, 255);
+  border-radius: 50px;
+  padding: 20px;
+  margin: 15px;
+  height: 96vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.login-title {
+  color: rgba(255, 0, 0, 0.55);
+  font-size: 23px;
+  margin-top: 100px;
+}
+
+#email, #password {
+  background-color: white;
+  margin-bottom: 25px;
+  border-radius: 45px;
+  border: none;
+  width: 265px;
+  height: 52px;
+  padding: 20px;
+  font-size: 14px;
+  position: relative;
+  bottom: -5px;
+}
+
+::placeholder {
+  color: rgb(185, 185, 185);
+}
+
+button {
+  background-color: white;
+  border: none;
+  border-radius: 45px;
+  width: 140px;
+  padding: 12px;
+  font-size: 13.5px;
+  margin-bottom: 30px;
+  margin-inline: 2px;
+  font-weight: bold;
+  color: rgba(255, 0, 0, 0.45);
+  position: relative;
+  top: 20px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+  .login-container {
+    padding: 40px;
+    margin: 0;
+    border-radius: 0;
+    height: 97.7vh;
+  }
+
+  .login-title {
+    font-size: 35px;
+    margin-top: 10px;
+  }
+
+  #email, #password {
+    width: 550px;
+    padding: 30px;
+    font-size: 16px;
+  }
+
+  button {
+    width: 160px;
+    padding: 15px;
+    font-size: 16px;
+  }
+}

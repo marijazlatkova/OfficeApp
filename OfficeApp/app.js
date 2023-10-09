@@ -5,7 +5,7 @@ require("./pkg/db/index");
 
 const { register, login, forgotPassword, resetPassword } = require("./handlers/authHandler");
 const { create, getAll, getOne, update, remove, getByUser, createByUser, uploadImage } = require("./handlers/postHandler");
-const { getDefaultPage, getRegisterPage, getForgotPassword, getResetPassword, getLoginPage, getHomePage, createPosts, getMyProfile, modifyPosts, removePosts, logout, uploadSingleImage } = require("./handlers/viewHandler");
+const { getDefaultPage, getRegisterPage, getForgotPassword, getResetPassword, getLoginPage, getHomePage, createPosts, getMyProfile, modifyPosts, removePosts, logout } = require("./handlers/viewHandler");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -69,7 +69,7 @@ app.get("/", getDefaultPage);
 app.get("/register", getRegisterPage);
 app.get("/login", getLoginPage);
 app.get("/home", getHomePage);
-app.post("/createPosts", uploadSingleImage, createPosts);
+app.post("/createPosts", createPosts);
 app.get("/myProfile", getMyProfile);
 app.post("/modifyPosts/:id", modifyPosts);
 app.get("/removePosts/:id", removePosts);

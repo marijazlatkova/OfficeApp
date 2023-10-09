@@ -3,77 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../css/global.css" />
+    <link rel="stylesheet" type="text/css" href="../css/home.css" />
   </head>
   <body>
-    <div class="header-container">
-      <p><%= title %></p>
-      <img
-        class="plus-logo"
-        width="250"
-        height="200"
-        src="../images/plus-logo.png"
-        alt="plus-logo"
-      />
-      <img
-        class="search-logo"
-        width="250"
-        height="200"
-        src="../images/search-logo.png"
-        alt="search-logo"
-      />
-      <p><%= subtitle %></p>
-      <img
-        class="myprofile-logo"
-        width="250"
-        height="200"
-        src="../images/myprofile-logo.png"
-        alt="myprofile-logo"
-        onclick="window.location.href = '/myProfile';"
-      />
-    </div>
-    <hr class="hr-1" />
-    <div class="input-container">
-      <form action="/createPosts" method="POST" enctype="multipart/form-data">
-        <label for="comment">What's on your mind?</label>
-        <br />
-        <hr class="hr-2" />
-        <input
-          type="hidden"
-          name="username"
-          id="username"
-          placeholder="username"
-          required
-          value="<%= username %>"
-        />
-        <input
-          type="text"
-          name="comment"
-          id="comment"
-          placeholder="Type here..."
-          required
-          onkeydown="if (e.key === 'Enter') { e.preventDefault(); this.form.submit(); }"
-        />
-        <br />
-        <input type="file" name="image" id="image" accept="image/*" />
-        <br />
-        <br />
-      </form>
-    </div>
-    <div class="posts-container">
-      <% posts.forEach(post => { %>
-      <div class="posts">
-        <img
-          class="profile-picture"
-          width="300"
-          height="200"
-          class="image"
-          src="/images/<%= post.image %>"
-        />
-        <h3 class="username"><%= post.username %></h3>
-        <p class="comment"><%= post.comment %></p>
-        <p class="time"><%= post.time %></p>
+    <div class="wrapper">
+      <div id="container">
+        <p class="title"><%= title %></p>
+        <div class="first-section">
+          <img
+            class="plus-logo"
+            src="../images/plus-logo.png"
+            alt="plus-logo"
+          />
+          <img
+            class="search-logo"
+            src="../images/search-logo.png"
+            alt="search-logo"
+          />
+        </div>
       </div>
-      <% }) %>
+      <div id="container">
+        <p class="subtitle"><%= subtitle %></p>
+        <div class="second-section">
+          <img
+            class="myprofile-logo"
+            src="../images/myprofile-logo.png"
+            alt="myprofile-logo"
+            onclick="window.location.href = '/myProfile';"
+          />
+        </div>
+      </div>
+      <hr class="hr-1" />
+      <div class="input-container">
+        <form action="/createPosts" method="POST">
+          <label id="comment" for="comment">What's on your mind?</label>
+          <br />
+          <hr class="hr-2" />
+          <input
+            type="hidden"
+            name="username"
+            id="username"
+            placeholder="username"
+            required
+            value="<%= username %>"
+          />
+          <input
+            type="text"
+            name="comment"
+            id="comment"
+            placeholder="Type here..."
+            required
+            onkeydown="if (e.key === 'Enter') { e.preventDefault(); this.form.submit(); }"
+          />
+          <br />
+          <br />
+        </form>
+      </div>
+      <div class="posts-container">
+        <% posts.forEach(post => { %>
+        <div class="posts">
+          <div class="post-wrapper">
+            <img src="/images/<%= post.image %>" />
+            <h3 class="username"><%= post.username %></h3>
+          </div>
+          <p class="comment"><%= post.comment %></p>
+          <p class="time"><%= post.time %></p>
+        </div>
+        <% }) %>
+      </div>
     </div>
   </body>
 </html>

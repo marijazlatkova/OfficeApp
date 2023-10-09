@@ -1,37 +1,5 @@
 const Post = require("../pkg/posts");
 
-const multer = require("multer");
-const uuid = require("uuid");
-const imageId = uuid.v4();
-
-const multerStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/images");
-  },
-  filename: (req, file, cb) => {
-    const ext = file.mimetype.split("/")[1];
-    cb(null, `profile-${imageId}-${Date.now()}.${ext}`);
-  }
-});
-
-const multerFilter = (req, file, cb) => {
-  console.log('File MIME Type:', file.mimetype);
-  
-  if (file.mimetype.startsWith("image")) {
-    cb(null, true);
-  } else {
-    console.log('Unsupported File Type');
-    cb(new Error("File type not supported"), false);
-  }
-};
-
-const upload = multer({
-  storage: multerStorage,
-  fileFilter: multerFilter,
-});
-
-const uploadSingleImage = upload.single("image");
-
 const getDefaultPage = async (req, res) => {
   try {
     return res.render("default-page", {
@@ -102,23 +70,15 @@ const getHomePage = async (req, res) => {
 
 const createPosts = async (req, res) => {
   try {
-    if (req.file) {
-      const filename = req.file.filename;
-      const userId = req.auth.id;
-
-      await Post.create({
-        username: req.auth.name,
-        comment: req.body.comment,
-        author: userId,
-        time: req.body.time,
-        image: filename
-      });
-      return res.redirect("/home");
-    } else {
-      return res.status(400).send("No image uploaded.");
-    }
+    const userId = req.auth.id;
+    await Post.create({
+      username: req.auth.name,
+      comment: req.body.comment,
+      author: userId,
+      time: req.body.time,
+    });
+    return res.redirect("/home");
   } catch (err) {
-    console.error(err);
     return res.status(500).send(err);
   }
 };
@@ -135,7 +95,6 @@ const getMyProfile = async (req, res) => {
       posts
     });
   } catch (err) {
-    console.log(err);
     return res.status(500).send(err);
   }
 };
@@ -168,7 +127,6 @@ const logout = (req, res) => {
 };
 
 module.exports = {
-  uploadSingleImage,
   getDefaultPage,
   getRegisterPage,
   getLoginPage,

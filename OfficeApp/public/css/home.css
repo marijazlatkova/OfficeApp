@@ -1,0 +1,218 @@
+.wrapper {
+  background-color: rgb(210, 254, 255);
+  border-radius: 50px;
+  margin: 15px;
+  padding: 20px;
+}
+
+#container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -20px;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 16px;
+  margin-left: 15px;
+}
+
+.subtitle {
+  font-size: 12px;
+  margin-left: 15px;
+}
+
+.first-section {
+  display: flex;
+  gap: 3px
+}
+
+.plus-logo {
+  margin-right: 10px;
+  border-radius: 20px;
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.search-logo {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+
+.myprofile-logo {
+  margin-right: 10px;
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+}
+
+
+.hr-1 {
+  border-top: 0.5px solid black;
+}
+
+.input-container {
+  height: 80px;
+  padding-top: 10px;
+  margin-top: 30px;
+  background-color: white;
+  border-radius: 30px;
+}
+
+#comment {
+  border: none;
+  color: rgb(185, 185, 185);
+  margin-left: 20px;
+  font-size: 13px;
+}
+
+::placeholder {
+  font-size: 13px;
+  color: rgb(185, 185, 185);
+}
+
+.posts-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.posts {
+  background-color: white;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.posts img {
+  width: 30px;
+  height: 17px;
+  border-radius: 25px
+}
+
+.username {
+  font-size: 11.5px;
+  font-weight: normal;
+}
+
+.comment,
+.time {
+  margin-left: 15px;
+  font-size: 9.7px;
+  font-weight: normal;
+  padding-right: 20px;
+  text-align: justify;
+  line-height: 1.4;
+  color: rgb(70, 70, 70);
+}
+
+.post-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    background-color: rgb(210, 254, 255);
+    padding: 5px;
+  }
+  
+  .wrapper {
+    border-radius: 0px;
+    margin: 0px;
+  }
+
+  .title {
+    margin-top: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(255, 0, 0, 0.4);
+    margin-left: 5px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    margin-left: 30px;
+    padding-top: 20px;
+    margin-bottom: 0px;
+  }
+
+  #container {
+    margin-top: -10px;
+  }
+
+  .first-section {
+    gap: 10px;
+  }
+  
+  .plus-logo {
+    width: 45px;
+    height: 35px;
+  }
+
+  .search-logo,
+  .myprofile-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .myprofile-logo {
+    margin-right: 40px;
+  }
+
+  .input-container {
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    height: 130px;
+    margin: 40px;
+    margin-top: 30px;
+    padding: 30px;
+  }
+
+  #comment {
+    font-size: 15px;
+    margin-left: 40px;
+    color: rgb(161, 161, 161);
+  }
+  
+  ::placeholder {
+    font-size: 15px;
+    color: rgb(161, 161, 161);
+  }
+
+  .hr-2 {
+    margin: 20px;
+  }
+
+  .posts {
+    margin: 0 40px;
+    padding: 20px;
+  }
+
+  .username {
+    font-size: 15px;
+  }
+  
+  .comment,
+  .time {
+    font-size: 14px;
+    margin-left: 45px;
+    color: rgb(40, 40, 40);
+  }
+
+  .posts img {
+    width: 47px;
+    height: 30px;
+    border-radius: 50px;
+  }
+}

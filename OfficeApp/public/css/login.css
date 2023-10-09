@@ -55,11 +55,8 @@ button {
 }
 
 @media screen and (min-width: 1024px) {
-  .login-container {
-    padding: 40px;
-    margin: 0;
-    border-radius: 0;
-    height: 97.7vh;
+  body {
+    background-color: rgb(210, 254, 255);
   }
 
   .login-title {

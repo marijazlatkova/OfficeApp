@@ -1,0 +1,173 @@
+.wrapper {
+  background-color: rgb(210, 254, 255);
+  border-radius: 50px;
+  padding: 20px;
+  margin: 15px;
+}
+
+.title-wrapper {
+  font-size: 11px;
+  display: flex;
+  justify-content: center;
+}
+
+.hr-1 {
+  border-top: 2px solid rgb(171, 171, 171);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.container img {
+  width: 30px;
+  height: 20px;
+  border-radius: 25px;
+  margin-bottom: 5px;
+}
+
+.container p {
+  font-size: 11.5px;
+}
+
+.home-logo {
+  margin-right: 10px;
+  border-radius: 20px;
+  width: 25px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.subcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subcontainer img {
+  margin-top: 10px;
+  border-radius: 50px;
+  width: 55px;
+  height: 45px;
+}
+
+.subcontainer h3 {
+  color: rgba(255, 0, 0, 0.5);
+  font-weight: normal;
+  font-size: 17px;
+}
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.posts-container p:first-child {
+  color: rgba(255, 0, 0, 0.5);
+  font-size: 12px;
+}
+
+.posts {
+  background-color: white;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.posts p {
+  margin-left: 15px;
+  font-size: 9.7px;
+  font-weight: normal;
+  padding-right: 20px;
+  text-align: justify;
+  line-height: 1.4;
+  color: rgb(70, 70, 70);
+}
+
+.modify-delete-wrapper {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 5px;
+}
+
+.delete-icon, 
+.modify-icon {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.modify-icon {
+  margin-bottom: 2.5px;
+}
+
+.logout-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logout-button {
+  background-color: white;
+  color: rgba(255, 0, 0, 0.45);
+  font-size: 11.5px;
+  font-weight: bold;
+  padding: 8px 90px;
+  border-radius: 40px;
+  border: none;
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    background-color: rgb(210, 254, 255);
+    padding: 5px;
+  }
+
+  .home-logo {
+    width: 55px;
+    height: 35px;
+  }
+
+  .title-wrapper p {
+    font-size: 24px;
+  }
+
+  .subcontainer img {
+    width: 90px;
+    height: 80px;
+  }
+
+  .subcontainer h3 {
+    font-size: 25px;
+  }
+  
+  .posts-container p:first-child {
+    font-size: 18px;
+  }
+  
+  .container img {
+    width: 50px;
+    height: 40px;
+  }
+
+  .container p {
+    font-size: 17px !important;
+  }
+
+  .posts p:nth-child(2) {
+    font-size: 15px;
+  }
+
+  .delete-icon,
+  .modify-icon {
+    width: 22px;
+    height: 21px;
+  }
+
+  .logout-button {
+    font-size: 15px;
+  }
+}

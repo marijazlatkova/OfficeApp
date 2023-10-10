@@ -89,7 +89,7 @@ const getMyProfile = async (req, res) => {
     const userId = req.auth.id;
     const posts = await Post.find({ author: userId });
     return res.render("my-profile", {
-      title: "My profile",
+      title: "My Profile",
       subtitle: "My statuses",
       username,
       posts

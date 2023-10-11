@@ -6,7 +6,7 @@
 }
 
 .title-wrapper {
-  font-size: 11px;
+  font-size: 11.5px;
   display: flex;
   justify-content: center;
 }
@@ -24,11 +24,11 @@
   width: 30px;
   height: 20px;
   border-radius: 25px;
-  margin-bottom: 5px;
 }
 
 .container p {
   font-size: 11.5px;
+  margin-bottom: 5px;
 }
 
 .home-logo {
@@ -77,11 +77,11 @@
 
 .posts p {
   margin-left: 15px;
-  font-size: 9.7px;
   font-weight: normal;
   padding-right: 20px;
   text-align: justify;
   line-height: 1.4;
+  font-size: 9.7px;
   color: rgb(70, 70, 70);
 }
 
@@ -104,6 +104,16 @@
   margin-bottom: 2.5px;
 }
 
+.comment-input,
+.comment-input:focus {
+  border: none;
+  outline: none;
+  text-indent: 15px;
+  font-size: 9.7px;
+  color: rgb(70, 70, 70);
+  width: 100%;
+}
+
 .logout-button-wrapper {
   display: flex;
   flex-direction: column;
@@ -118,12 +128,12 @@
   padding: 8px 90px;
   border-radius: 40px;
   border: none;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 1024px) {
   body {
     background-color: rgb(210, 254, 255);
-    padding: 5px;
   }
 
   .home-logo {
@@ -132,7 +142,7 @@
   }
 
   .title-wrapper p {
-    font-size: 24px;
+    font-size: 23px;
   }
 
   .subcontainer img {
@@ -145,7 +155,8 @@
   }
   
   .posts-container p:first-child {
-    font-size: 18px;
+    font-size: 17.5px;
+    margin: 0px;
   }
   
   .container img {
@@ -154,10 +165,18 @@
   }
 
   .container p {
-    font-size: 17px !important;
+    font-size: 16px !important;
+    margin-bottom: 10px;
   }
 
-  .posts p:nth-child(2) {
+  .comment {
+    font-size: 15px !important;
+    text-indent: 50px;
+  }
+
+  .comment-input, 
+  .comment-input:focus {
+    text-indent: 60px;
     font-size: 15px;
   }
 
@@ -168,6 +187,6 @@
   }
 
   .logout-button {
-    font-size: 15px;
+    font-size: 17px;
   }
 }

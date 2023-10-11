@@ -12,8 +12,8 @@
         <img
           class="home-logo"
           src="../images/home-logo.png"
-          onclick="window.location.href = '/home';"
           alt="home-logo"
+          onclick="window.location.href = '/home';"
         />
         <div class="title-wrapper">
           <p><%= title %></p>
@@ -32,33 +32,34 @@
             <img src="/images/<%= post.image %>" />
             <p><%= post.username %></p>
           </div>
-          <p><%= post.comment %></p>
-          <div class="modify-delete-wrapper">
-            <img
-              onclick="toggleForm('<%= post._id %>')"
-              class="modify-icon"
-              src="../images/modify-icon.png"
-              alt="modify-icon"
-            />
-            <form
-              action="/modifyPosts/<%= post._id %>"
-              method="POST"
-              id="modifyForm<%= post._id %>"
+          <form action="/modifyPosts/<%= post._id %>" method="POST">
+            <input
+              class="comment-input"
+              type="text"
+              name="comment"
+              id="comment-<%= post._id %>"
+              value="<%= post.comment %>"
               style="display: none"
-            >
-              <input
-                type="text"
-                name="comment"
-                id="comment"
-                placeholder="Modify your comment here..."
-                required
-                onkeydown="if (e.key === 'Enter') { e.preventDefault(); this.form.submit(); }"
+            />
+            <p class="comment" id="commentText-<%= post._id %>">
+              <%= post.comment %>
+            </p>
+            <div class="modify-delete-wrapper">
+              <img
+                onclick="modifyPost('<%= post._id %>')"
+                class="modify-icon"
+                src="../images/modify-icon.png"
+                alt="modify-icon"
               />
-            </form>
-            <a href="/removePosts/<%= post._id %>"
-              ><img class="delete-icon" src="../images/delete.png" alt="delete"
-            /></a>
-          </div>
+              <button type="submit" style="display: none">Save</button>
+              <a href="/removePosts/<%= post._id %>"
+                ><img
+                  class="delete-icon"
+                  src="../images/delete.png"
+                  alt="delete"
+              /></a>
+            </div>
+          </form>
         </div>
         <% }) %>
       </div>
@@ -74,13 +75,16 @@
       </div>
     </div>
     <script>
-      const toggleForm = (postId) => {
-        const form = document.getElementById("modifyForm" + postId);
-        if (form.style.display === "none") {
-          form.style.display = "block";
-        } else {
-          form.style.display = "none";
-        }
+      const modifyPost = (id) => {
+        const form = document.getElementById(`comment-${id}`);
+        const p = document.getElementById(`commentText-${id}`);
+        const saveButton = document.querySelector(
+          `button[data-post-id="${id}"]`
+        );
+        form.style.display = form.style.display === "none" ? "block" : "none";
+        p.style.display = p.style.display === "none" ? "block" : "none";
+        saveButton.style.display =
+          saveButton.style.display === "none" ? "inline-block" : "none";
       };
     </script>
   </body>

@@ -3,10 +3,9 @@ const dotenv = require("dotenv");
 
 dotenv.config({ path: `${__dirname}/../../config.env` });
 
-const db = process.env.DATABASE.replace(
-  "<PASSWORD>",
-  process.env.DATABASE_PASSWORD
-);
+const db = process.env.DATABASE
+  .replace("<USERNAME>", process.env.DATABASE_USERNAME)
+  .replace("<PASSWORD>", process.env.DATABASE_PASSWORD);
 
 (async function () {
   try {

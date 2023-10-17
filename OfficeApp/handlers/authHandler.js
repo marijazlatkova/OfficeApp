@@ -7,10 +7,12 @@ const { sendWelcomeEmail, sendPasswordResetEmail } = require("../pkg/mailer");
 const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = await User.create({
       name,
       email,
-      password
+      password: hashedPassword,
+      image: req.file ? req.file.filename : 'default.png'
     });
     await sendWelcomeEmail(email);
     return res.status(201).send(newUser);
@@ -96,12 +98,9 @@ const resetPassword = async (req, res) => {
 
 const protect = async (req, res, next) => {
   try {
-    let token;
-    if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
-      token = req.headers.authorization.split(" ")[1];
-    }
+    const token = req.cookies.jwt;
     if (!token) {
-      return res.status(401).send("You are not logged in. Please log in.");
+      return res.status(500).send("You are not logged in! Please log in");
     }
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id);
@@ -111,6 +110,7 @@ const protect = async (req, res, next) => {
     req.auth = user;
     next();
   } catch (err) {
+    console.log(err);
     return res.status(500).send("Internal Server Error");
   }
 };

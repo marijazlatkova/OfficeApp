@@ -16,8 +16,7 @@ const postSchema = new mongoose.Schema({
     ref: "users"
   },
   image: {
-    type: String,
-    default: "default.png"
+    type: String
   }
 });
 

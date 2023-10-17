@@ -29,7 +29,7 @@
         <% posts.forEach(post => { %>
         <div class="posts">
           <div class="container">
-            <img src="/images/<%= post.image %>" />
+            <img src="/images/<%= image %>" />
             <p><%= post.username %></p>
           </div>
           <form action="/modifyPosts/<%= post._id %>" method="POST">

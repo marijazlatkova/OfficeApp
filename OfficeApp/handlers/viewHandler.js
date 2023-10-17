@@ -56,11 +56,13 @@ const getResetPassword = async (req, res) => {
 const getHomePage = async (req, res) => {
   try {
     const username = req.auth.name;
+    const image = req.auth.image;
     const posts = await Post.find();
     return res.render("home", {
       title: "The Office Chat App",
       subtitle: "Welcome to news feed",
       username,
+      image,
       posts
     });
   } catch (err) {
@@ -87,11 +89,13 @@ const getMyProfile = async (req, res) => {
   try {
     const username = req.auth.name;
     const userId = req.auth.id;
+    const image = req.auth.image;
     const posts = await Post.find({ author: userId });
     return res.render("my-profile", {
       title: "My Profile",
       subtitle: "My statuses",
       username,
+      image,
       posts
     });
   } catch (err) {

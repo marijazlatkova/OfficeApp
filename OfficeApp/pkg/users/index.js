@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -24,14 +23,11 @@ const userSchema = new mongoose.Schema({
     required: [true, "Password is required"],
     minlength: [8, "Password must be at least 8 characters"],
     validate: [validator.isStrongPassword, "Please provide a strong password"]
+  },
+  image: {
+    type: String,
+    default: "default.png"
   }
-});
-
-//! Proverka dali passwordot e promenet pred da bide hashiran i zacuvan vo databaza
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  this.password = await bcrypt.hash(this.password, 12);
-  next();
 });
 
 module.exports = mongoose.model("User", userSchema, "users");

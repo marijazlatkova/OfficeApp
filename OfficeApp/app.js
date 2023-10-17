@@ -3,9 +3,10 @@ const jwt = require("express-jwt");
 const cookieParser = require("cookie-parser");
 require("./pkg/db/index");
 
-const { register, login, forgotPassword, resetPassword } = require("./handlers/authHandler");
-const { create, getAll, getOne, update, remove, getByUser, createByUser, uploadImage } = require("./handlers/postHandler");
+const { register, login, forgotPassword, resetPassword, protect } = require("./handlers/authHandler");
+const { create, getAll, getOne, update, remove, getByUser, createByUser } = require("./handlers/postHandler");
 const { getDefaultPage, getRegisterPage, getForgotPassword, getResetPassword, getLoginPage, getHomePage, createPosts, getMyProfile, modifyPosts, removePosts, logout } = require("./handlers/viewHandler");
+const { uploadImage } = require("./handlers/storageHandler");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -48,7 +49,7 @@ app.use(jwt
 );
 
 //! user routes
-app.post("/api/v1/auth/register", register);
+app.post("/api/v1/auth/register", uploadImage, register);
 app.post("/api/v1/auth/login", login);
 app.post("/api/v1/auth/forgotPassword", forgotPassword);
 app.post("/api/v1/auth/resetPassword", resetPassword);
@@ -56,10 +57,10 @@ app.get("/forgotPassword", getForgotPassword);
 app.get("/resetPassword", getResetPassword);
 
 //! posts routes
-app.post("/posts", create);
+app.post("/posts", uploadImage, create);
 app.get("/posts", getAll);
 app.get("/posts/:id", getOne);
-app.patch("/posts/:id", uploadImage, update);
+app.patch("/posts/:id", update);
 app.delete("/posts/:id", remove);
 app.post("/createByUser", createByUser);
 app.get("/getByUser", getByUser);
@@ -68,13 +69,12 @@ app.get("/getByUser", getByUser);
 app.get("/", getDefaultPage);
 app.get("/register", getRegisterPage);
 app.get("/login", getLoginPage);
-app.get("/home", getHomePage);
+app.get("/home", protect, getHomePage);
 app.post("/createPosts", createPosts);
-app.get("/myProfile", getMyProfile);
+app.get("/myProfile", protect, getMyProfile);
 app.post("/modifyPosts/:id", modifyPosts);
 app.get("/removePosts/:id", removePosts);
 app.get("/logout", logout);
-
 
 app.listen(process.env.PORT, (err) => {
   err

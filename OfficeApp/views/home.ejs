@@ -56,7 +56,11 @@
         <% posts.forEach(post => { %>
         <div class="posts">
           <div class="post-wrapper">
+            <% if (post.username === username) { %>
+            <img src="/images/<%= image %>" />
+            <% } else { %>
             <img src="/images/<%= post.image %>" />
+            <% } %>
             <h3 class="username"><%= post.username %></h3>
           </div>
           <p class="comment"><%= post.comment %></p>

@@ -1,11 +1,14 @@
-const User = require("../pkg/users");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
+const User = require("../pkg/users");
+const { UserRegister, UserLogin, ResetPass, validate } = require("../pkg/users/validate");
 const { sendWelcomeEmail, sendPasswordResetEmail } = require("../pkg/mailer");
+const { MailtrapFields } = require("../pkg/mailer/validate");
 
 const register = async (req, res) => {
   try {
+    await validate(req.body, UserRegister, MailtrapFields);
     const { name, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = await User.create({
@@ -23,6 +26,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
+    await validate(req.body, UserLogin);
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).send("Please provide email and password");
@@ -76,6 +80,7 @@ const forgotPassword = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   try {
+    await validate(req.body, ResetPass);
     const { oldPassword, newPassword, email } = req.body;
     const user = await User.findOne({ email });
     if (!user) {

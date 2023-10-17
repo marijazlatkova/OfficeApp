@@ -59,7 +59,7 @@
             <% if (post.username === username) { %>
             <img src="/images/<%= image %>" />
             <% } else { %>
-            <img src="/images/<%= post.image %>" />
+            <img src="/images/<%= post.image || 'default.png' %>" />
             <% } %>
             <h3 class="username"><%= post.username %></h3>
           </div>

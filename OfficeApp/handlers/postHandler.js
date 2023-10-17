@@ -1,7 +1,9 @@
 const Post = require("../pkg/posts");
+const { commentPost, commentPut, validate } = require("../pkg/posts/validate");
 
 const create = async (req, res) => {
   try {
+    await validate(req.body, commentPost);
     if (req.file) {
       const filename = req.file.filename;
       req.body.image = filename;
@@ -37,6 +39,7 @@ const getOne = async (req, res) => {
 
 const update = async (req, res) => {
   try {
+    await validate(req.body, commentPut);
     await Post.findByIdAndUpdate(req.params.id, req.body);
     return res.status(204).send("Post updated successfully");
   } catch (err) {

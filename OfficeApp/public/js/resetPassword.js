@@ -1,4 +1,4 @@
-const resetPassword = async (oldPassword, newPassword) => {
+const resetPassword = async (email, oldPassword, newPassword) => {
   try {
     const response = await fetch("/api/v1/auth/resetPassword", {
       method: "POST",
@@ -6,6 +6,7 @@ const resetPassword = async (oldPassword, newPassword) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        email,
         oldPassword,
         newPassword,
       }),
@@ -20,7 +21,8 @@ const resetPassword = async (oldPassword, newPassword) => {
 
 document.querySelector("form").addEventListener("submit", (e) => {
   e.preventDefault();
+  const email = document.getElementById("email").value;
   const oldPassword = document.getElementById("oldPassword").value;
   const newPassword = document.getElementById("newPassword").value;
-  resetPassword(oldPassword, newPassword);
+  resetPassword(email, oldPassword, newPassword);
 });

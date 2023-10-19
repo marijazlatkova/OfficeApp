@@ -21,7 +21,7 @@ const getRegisterPage = async (req, res) => {
   }
 };
 
-const getLoginPage= async (req, res) => {
+const getLoginPage = async (req, res) => {
   try {
     return res.render("login", {
       title: "The Office Chat App",

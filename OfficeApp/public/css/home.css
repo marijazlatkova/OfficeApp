@@ -52,6 +52,13 @@
   cursor: pointer;
 }
 
+.plus-logo:hover,
+.search-logo:hover,
+.myprofile-logo:hover {
+  transform: translateY(-4px);
+  transition: 900ms;
+}
+
 .hr-1 {
   border-top: 0.5px solid black;
 }
@@ -94,6 +101,11 @@
   background-color: white;
   border-radius: 30px;
   padding: 10px;
+  cursor: pointer;
+}
+
+.posts:hover {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 .posts img {
@@ -113,6 +125,7 @@
   font-weight: normal;
   padding-right: 20px;
   line-height: 1.3;
+  word-wrap: break-word;
 }
 
 .comment {

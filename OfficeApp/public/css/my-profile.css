@@ -39,6 +39,11 @@
   cursor: pointer;
 }
 
+.home-logo:hover {
+  transform: translateY(-4px);
+  transition: 900ms;
+}
+
 .subcontainer {
   display: flex;
   flex-direction: column;
@@ -73,6 +78,11 @@
   background-color: white;
   border-radius: 30px;
   padding: 10px;
+  cursor: pointer;
+}
+
+.posts:hover {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 .posts p {
@@ -83,6 +93,7 @@
   line-height: 1.4;
   font-size: 9.7px;
   color: rgb(70, 70, 70);
+  word-wrap: break-word;
 }
 
 .modify-delete-wrapper {
@@ -102,6 +113,12 @@
 
 .modify-icon {
   margin-bottom: 2.5px;
+}
+
+.delete-icon:hover, 
+.modify-icon:hover {
+  transform: translateY(-4px);
+  transition: 900ms;
 }
 
 .comment-input,
@@ -165,13 +182,13 @@
   }
 
   .container p {
-    font-size: 16px !important;
+    font-size: 16px;
     margin-bottom: 10px;
   }
 
-  .comment {
-    font-size: 15px !important;
-    text-indent: 50px;
+  .posts p:nth-last-child(2) {
+    font-size: 15px;
+    padding-left: 50px;
   }
 
   .comment-input, 

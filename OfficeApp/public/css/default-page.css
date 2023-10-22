@@ -43,6 +43,10 @@ button {
   margin-top: 20px;
 }
 
+button:hover {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+}
+
 @media screen and (min-width: 1024px) {
   body {
     background-color: rgb(210, 254, 255);

@@ -1,37 +1,71 @@
-## The Office Chat App
+# The Office Chat App
 
 The Office Chat App is a social network designed for working, socializing and exchanging information.
 
-### 🚀 Explore the Pages:
+# 🚀 Explore the Pages:
 
-**Default Page:** On this page, users can choose whether they want to login or create a new user account.
+## Default Page:
 
-**Registration Page:** On this page, new users can create their own account. During the registration, they will be required to enter the necessary information, such as name, e-mail and password.
+The Default Page serves as the initial landing page for users. It provides the options to either log in with existing credentials or create a new user account. Users can make this choice based on whether they are already registered or new to the platform.
 
-**Login Page:** On this page users can log in with their existing credentials. Here they will need to enter their email and password.
+![Alt Text](https://i.imgur.com/XTbE9Mx.png)
 
-**Home Page:** This page is only available to logged in users. On it, users can create new posts and view posts posted by other users.
+![Alt Text](https://i.imgur.com/JOxK6Fb.png)
 
-**My Profile Page:** On this page, the logged in user can see his posts, as well as delete them if he wants. There is also an option to log out of the application.
+## Registration Page: 
 
-🌈 Additional Iformation:
+The Registration Page is where new users can sign up for the app. During registration, they are required to put essential information, including their name, email, and password. This information is used to create their user account.
 
-**✏️ Edit Posts:** Registered users have the ability to edit their own posts directly from their profile pages, providing flexibility in customizing their content.
+![Alt Text](https://i.imgur.com/Ydf8xHH.png)
 
-**⏰ Timestamps:** Each new post on the Home Page displays the precise creation time, visible to all users, ensuring transparency and accountability.
+![Alt Text](https://i.imgur.com/CCe68kZ.png)
 
-### 🛠️ Development Details:
+## Login Page:
+
+The Login Page is where registered users can access their accounts by providing their email and password. This is the authentication process that ensures only authorized users can access the app's features.
+
+![Alt Text](https://i.imgur.com/aKScTly.png)
+
+![Alt Text](https://i.imgur.com/lL0K4i5.png)
+
+## Home Page:
+
+The Home Page is exclusively accessible to logged-in users. On this page, users can create new posts, share content, engage with other users, see what other people are posting and stay updated with what they're sharing.
+
+![Alt Text](https://i.imgur.com/25jwQsT.png)
+
+![Alt Text](https://i.imgur.com/K6Y33qQ.png)
+
+## My Profile Page:
+
+The My Profile Page is a user-specific page available to logged-in users. On this page, users can view their own posts, enabling them to manage their content, also delete their posts if they wish to remove specific content. There is also an option to log out of the application. This feature allows users to securely log out of their accounts, ensuring that their data and sessions are protected.
+
+![Alt Text](https://i.imgur.com/q7EcK8K.png)
+
+![Alt Text](https://i.imgur.com/xfoO0Jm.png)
+
+# 🌈 Additional Iformation:
+
+## ✏️ Edit Posts:
+
+Registered users have the ability to edit their own posts directly from their profile pages, providing flexibility in customizing their content.
+
+## ⏰ Timestamps:
+
+Each new post on the Home Page displays the precise creation time, visible to all users, ensuring transparency and accountability.
+
+## 🛠️ Development Details:
 
 During the creation of The Office Chat App, the following tools and technologies were used:
 
-**Node.js**
+#### 1. *Node.js*
 
-**MongoDB**
+#### 2. *MongoDB*
 
-**Express.js**
+#### 3. *Express.js*
 
-**Express middleware for handling JWT (Json Web Token) and file upload**
+#### 4. *Express middleware for handling JWT (Json Web Token) and file upload*
 
-**Node.js libraries for working with bcrypt, data validation, and MongoDB interactions**
+#### 5. *Node.js libraries for working with bcrypt, data validation, and MongoDB interactions*
 
-**EJS (Embedded JavaScript Templating)**
+#### 6. *EJS (Embedded JavaScript Templating)*

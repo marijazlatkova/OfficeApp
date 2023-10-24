@@ -10,39 +10,39 @@ The Default Page serves as the initial landing page for users. It provides the o
 
 ![Alt Text](https://i.imgur.com/XTbE9Mx.png)
 
-![Alt Text](https://i.imgur.com/JOxK6Fb.png)
+![Alt Text](https://i.imgur.com/22gH9aD.png)
 
 ## Registration Page: 
 
 The Registration Page is where new users can sign up for the app. During registration, they are required to put essential information, including their name, email, and password. This information is used to create their user account.
 
-![Alt Text](https://i.imgur.com/Ydf8xHH.png)
+![Alt Text](https://i.imgur.com/1aWOcP6.png)
 
-![Alt Text](https://i.imgur.com/CCe68kZ.png)
+![Alt Text](https://i.imgur.com/HbRA6Qk.png)
 
 ## Login Page:
 
 The Login Page is where registered users can access their accounts by providing their email and password. This is the authentication process that ensures only authorized users can access the app's features.
 
-![Alt Text](https://i.imgur.com/aKScTly.png)
+![Alt Text](https://i.imgur.com/0bKWtWX.png)
 
-![Alt Text](https://i.imgur.com/lL0K4i5.png)
+![Alt Text](https://i.imgur.com/5ADhSey.png)
 
 ## Home Page:
 
 The Home Page is exclusively accessible to logged-in users. On this page, users can create new posts, share content, engage with other users, see what other people are posting and stay updated with what they're sharing.
 
-![Alt Text](https://i.imgur.com/25jwQsT.png)
+![Alt Text](https://i.imgur.com/S48SbrE.png)
 
-![Alt Text](https://i.imgur.com/K6Y33qQ.png)
+![Alt Text](https://i.imgur.com/vvguEqo.png)
 
 ## My Profile Page:
 
 The My Profile Page is a user-specific page available to logged-in users. On this page, users can view their own posts, enabling them to manage their content, also delete their posts if they wish to remove specific content. There is also an option to log out of the application. This feature allows users to securely log out of their accounts, ensuring that their data and sessions are protected.
 
-![Alt Text](https://i.imgur.com/q7EcK8K.png)
+![Alt Text](https://i.imgur.com/Sat1MW3.png)
 
-![Alt Text](https://i.imgur.com/xfoO0Jm.png)
+![Alt Text](https://i.imgur.com/ZehlZga.png)
 
 # 🌈 Additional Iformation:
 

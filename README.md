@@ -44,7 +44,7 @@ The My Profile Page is a user-specific page available to logged-in users. On thi
 
 ![Alt Text](https://i.imgur.com/ZehlZga.png)
 
-# 🌈 Additional Iformation:
+# 🌈 Additional Information:
 
 ## ✏️ Edit Posts:
 

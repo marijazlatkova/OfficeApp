@@ -60,7 +60,7 @@ app.get("/resetPassword", getResetPassword);
 app.post("/posts", uploadImage, create);
 app.get("/posts", getAll);
 app.get("/posts/:id", getOne);
-app.patch("/posts/:id", update);
+app.put("/posts/:id", update);
 app.delete("/posts/:id", remove);
 app.post("/createByUser", createByUser);
 app.get("/getByUser", getByUser);
